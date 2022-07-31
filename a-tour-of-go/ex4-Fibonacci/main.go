@@ -4,8 +4,10 @@ import "fmt"
 
 func fibonacci() func() int {
 	var x, y = 0, 1
+
 	return func() (z int) {
 		z, x, y = x, y, x+y
+
 		return
 	}
 }

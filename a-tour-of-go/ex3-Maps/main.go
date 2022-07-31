@@ -10,9 +10,11 @@ func WordCount(s string) map[string]int {
 	wrds := strings.Fields(s)
 	num := len(wrds)
 	ans := make(map[string]int)
+
 	for i := 0; i < num; i++ {
 		(ans[wrds[i]])++
 	}
+
 	return ans
 }
 
