@@ -9,20 +9,25 @@ import (
 
 func main() {
 	// There is a text, you need to count how many times each word occurs.
-	str := "shivam sharma core dev course maps attempt shivam course"
-	printWordCount(str)
+	const str = "shivam sharma core dev course maps attempt shivam course"
+	wordCountMap := printWordCount(str)
+
+	for key, value := range wordCountMap {
+		fmt.Printf("%s: %d\n", key, value)
+	}
 
 	fmt.Println()
 	// There is a very large array or slice of integers, it must be said which numbers are mentioned in it at least once.
 	slice0 := []int{1, 2, 4, 6, 8, 9, 20, 1, 6}
-	printPresentNumbers(slice0)
+	mapPresent := printPresentNumbers(slice0)
+	fmt.Printf("Present numbers in slice: %v\n", mapPresent)
 
-	fmt.Println()
+	fmt.Printf("\n\n")
 
 	// There are two large arrays of numbers, you need to find which numbers are mentioned in both.
 	slice1 := []int{1, 2, 3, 4, 7, 9, 19, 2, 6}
 
-	slice2 := printOverlappingNumbers(slice0, slice1)
+	slice2 := commonNumbers(slice0, slice1)
 	fmt.Printf("slice1: %v\n", slice1)
 	fmt.Printf("slice2: %v\n", slice2)
 	fmt.Printf("Common numbers are : %v\n\n", slice2)
@@ -39,6 +44,7 @@ func main() {
 
 	// you have map[fee]map[nonce]Account (Account [20]byte), you need to print it as sorted data: descending sorting by fee first and ascending by nonce last.
 	sort3dMap(m2)
+	fmt.Println(m2)
 }
 
 // generateRandom3dMap generates a 3d map with random values
@@ -70,7 +76,7 @@ func generateRandom3dMap(l1, l2 int) map[int]map[int]bool {
 }
 
 // There is a text, you need to count how many times each word occurs.
-func printWordCount(str string) {
+func printWordCount(str string) map[string]int {
 	strArr := strings.Fields(str)
 	mapCount := make(map[string]int, 0)
 
@@ -80,30 +86,29 @@ func printWordCount(str string) {
 
 	fmt.Println("string ", str)
 
-	for key, value := range mapCount {
-		fmt.Printf("%s: %d\n", key, value)
-	}
+	return mapCount
 }
 
 // There is a very large array or slice of integers, it must be said which numbers are mentioned in it at least once.
-func printPresentNumbers(ints []int) {
-	mapCount := make(map[int]bool, len(ints))
+func printPresentNumbers(ints []int) []int {
+	mapPresent := make(map[int]bool, len(ints))
 
 	for i := 0; i < len(ints); i++ {
-		mapCount[ints[i]] = true
+		mapPresent[ints[i]] = true
 	}
 
 	fmt.Printf("Occurrence of each number in slice: %v\n", ints)
 
-	for key := range mapCount {
-		fmt.Printf("%d ", key)
+	ansArr := make([]int, 0, len(mapPresent))
+	for key := range mapPresent {
+		ansArr = append(ansArr, key)
 	}
 
-	fmt.Printf("\n")
+	return ansArr
 }
 
 // There are two large arrays of numbers, you need to find which numbers are mentioned in both.
-func printOverlappingNumbers(ints1 []int, ints2 []int) []int {
+func commonNumbers(ints1 []int, ints2 []int) []int {
 	commonMap := make(map[int]bool, len(ints1))
 
 	for i := 0; i < len(ints1); i++ {
@@ -164,7 +169,7 @@ func sort3dMap(_3dmap map[int]map[int]bool) {
 			keys2 = append(keys2, k2)
 		}
 
-		sort.Sort(sort.Reverse(sort.IntSlice(keys2)))
+		sort.Sort(sort.IntSlice(keys2))
 
 		for _, k2 := range keys2 {
 			fmt.Printf("Fee : %d ; Nonce : %d \n", k1, k2)
