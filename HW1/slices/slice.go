@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	// Init Slice with ints
 	slice1 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	fmt.Println("slice1: ", slice1)
@@ -102,7 +101,6 @@ func main() {
 	fmt.Println("sliceStr after sortAsc: ", sliceStr)
 	sortStrings(sliceStr, false)
 	fmt.Println("sliceStr after sortDesc: ", sliceStr)
-
 }
 
 // Add given int(N) to each of []int elements
@@ -110,6 +108,7 @@ func addToEach(slice []int, N int) []int {
 	for i := 0; i < len(slice); i++ {
 		slice[i] = slice[i] + N
 	}
+
 	return slice
 }
 
@@ -129,6 +128,7 @@ func addToBeginning(slice []int, N int) []int {
 func takeLast(slice []int) ([]int, int) {
 	last := slice[len(slice)-1]
 	slice = slice[:len(slice)-1]
+
 	return slice, last
 }
 
@@ -136,6 +136,7 @@ func takeLast(slice []int) ([]int, int) {
 func takeFirst(slice []int) ([]int, int) {
 	first := slice[0]
 	slice = slice[1:]
+
 	return slice, first
 }
 
@@ -143,6 +144,7 @@ func takeFirst(slice []int) ([]int, int) {
 func takeIth(slice []int, i int) ([]int, int) {
 	ith := slice[i]
 	slice = append(slice[:i], slice[i+1:]...)
+
 	return slice, ith
 }
 
@@ -155,12 +157,15 @@ func merge(slice1 []int, slice2 []int) []int {
 	for _, v := range slice1 {
 		if !m[v] {
 			m[v] = true
+
 			slice = append(slice, v)
 		}
 	}
+
 	for _, v := range slice2 {
 		if !m[v] {
 			m[v] = true
+
 			slice = append(slice, v)
 		}
 	}
@@ -173,6 +178,7 @@ func removeCommon(slice1 []int, slice2 []int) []int {
 	for _, v := range slice2 {
 		slice1 = removeElement(slice1, v)
 	}
+
 	return slice1
 }
 
@@ -183,6 +189,7 @@ func removeElement(slice []int, element int) []int {
 			slice = append(slice[:i], slice[i+1:]...)
 		}
 	}
+
 	return slice
 }
 
@@ -191,6 +198,7 @@ func shiftLeft(slice []int) []int {
 	if len(slice) < 2 {
 		return slice
 	}
+
 	slice = append(slice[1:], slice[:1]...)
 
 	return slice
@@ -212,6 +220,7 @@ func shiftRight(slice []int) []int {
 	if len(slice) < 2 {
 		return slice
 	}
+
 	slice = append(slice[len(slice)-1:], slice[:len(slice)-1]...)
 
 	return slice
@@ -241,6 +250,7 @@ func swapEvenOdd(slice []int) []int {
 	for i := 0; i < len(slice); i += 2 {
 		slice[i], slice[i+1] = slice[i+1], slice[i]
 	}
+
 	return slice
 }
 
@@ -248,8 +258,10 @@ func swapEvenOdd(slice []int) []int {
 func sortInts(slice []int, asc bool) {
 	sort.Slice(slice, func(i, j int) bool {
 		if asc {
+
 			return slice[i] < slice[j]
 		} else {
+
 			return slice[i] > slice[j]
 		}
 	})
