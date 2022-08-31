@@ -46,11 +46,12 @@ func generateRandom3dMap(l1, l2 int) map[int]map[int]bool {
 	m := make(map[int]map[int]bool)
 
 	for i := 0; i < l1; i++ {
+		// nolint:gosec
 		idx := rand.Intn(1000)
 
 		for {
-
 			if _, ok := m[idx]; ok {
+				// nolint:gosec
 				idx = rand.Intn(1000)
 			} else {
 				break
@@ -60,7 +61,7 @@ func generateRandom3dMap(l1, l2 int) map[int]map[int]bool {
 		m[idx] = make(map[int]bool)
 
 		for j := 0; j < l2; j++ {
-
+			// nolint:gosec
 			m[idx][rand.Intn(1000)] = true
 		}
 	}
@@ -70,9 +71,9 @@ func generateRandom3dMap(l1, l2 int) map[int]map[int]bool {
 
 // There is a text, you need to count how many times each word occurs.
 func printWordCount(str string) {
-
 	strArr := strings.Fields(str)
 	mapCount := make(map[string]int, 0)
+
 	for _, val := range strArr {
 		mapCount[val]++
 	}
@@ -82,7 +83,6 @@ func printWordCount(str string) {
 	for key, value := range mapCount {
 		fmt.Printf("%s: %d\n", key, value)
 	}
-
 }
 
 // There is a very large array or slice of integers, it must be said which numbers are mentioned in it at least once.
